@@ -23,7 +23,7 @@ Filtered_TPM_gene_prot = TPM_gene %>% inner_join(expressed_gene, by = "gene_id")
 Filtered_TPM_iso_prot = TPM_iso %>% inner_join(expressed_iso, by = "transcript_id") %>% 
     inner_join(protein_coding %>% select(transcript_id), by = "transcript_id")
 
-max_lines = 50000
+max_lines = 25000
 Filtered_TPM_gene_prot %>% select(gene_id) %>% 
     inner_join(protein_coding, by = "gene_id") %>% 
     mutate(file_id = (row_number() - 1) %/% max_lines + 1) %>% 
