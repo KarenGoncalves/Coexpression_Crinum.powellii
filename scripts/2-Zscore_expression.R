@@ -71,7 +71,7 @@ Exp_table_long_averaged <- Exp_table_long %>%
     full_join(metadata, 
               by = join_by("library" == "Run Accession")) %>% 
     group_by(gene_ID, Sample_name) %>% 
-    summarise(mean.logTPM = mean(logTPM)) %>% 
+    summarise(mean.TPM = mean(tpm)) %>% 
     ungroup()  
 
 head(Exp_table_long_averaged)
@@ -80,7 +80,7 @@ head(Exp_table_long_averaged)
 
 Exp_table_long_averaged_z <- Exp_table_long_averaged %>% 
     group_by(gene_ID) %>% 
-    mutate(z.score = zscore(mean.logTPM)) %>% 
+    mutate(z.score = zscore(mean.TPM)) %>% 
     ungroup()
 split_at <- 400000
 
