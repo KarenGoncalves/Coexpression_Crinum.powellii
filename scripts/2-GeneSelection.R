@@ -74,15 +74,15 @@ save(Exp_table_long_averaged_z_high_var,
      file = "RDATA/GeneSelection_objects.RData"
      )
 # Check where the bait genes fall along the variance distribution
-var_plot = all_var_and_ranks %>% 
+(var_plot = all_var_and_ranks %>% 
 	ggplot(aes(x = CV.logTPM, y = rank))  +
 	geom_hline(
 		data = bait_var, aes(yintercept = rank),
-		color = "tomato1", linewidth = 0.1, alpha = 0.5
+		color = "tomato1", linewidth = 0.2, alpha = 0.5
 	) +
 	geom_vline(
 		data = bait_var, aes(xintercept = CV.logTPM), 
-		color = "tomato1", linewidth = 0.1, alpha = 0.5
+		color = "tomato1", linewidth = 0.2, alpha = 0.5
 	) +
 	geom_rect( 
 		xmax = max(high_var_genes_20qnt$CV.logTPM), 
@@ -100,7 +100,7 @@ var_plot = all_var_and_ranks %>%
 		text = element_text(size = 11),
 		axis.text = element_text(color = "black"),
 		plot.caption = element_text(hjust = 0)
-	) 
+	) )
 
 ggsave(plot = var_plot, 
        filename = "plots/gene_var_distribution.png", 
