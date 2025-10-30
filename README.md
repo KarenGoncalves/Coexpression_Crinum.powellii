@@ -1,7 +1,7 @@
 Data from _de novo_ assembly
 
 - Used kallisto to map and count reads;
-- Used TPM table and removed genes with total expression < 1 TPM
+- Used TPM table and removed genes with mean expression < 1 TPM in all tissues
 - Kept only protein-encoding genes
 - Used coefficient of variation of log10(TPM) as measure of variability
 - Select genes in the 80th> quantile of variability for construction of network
