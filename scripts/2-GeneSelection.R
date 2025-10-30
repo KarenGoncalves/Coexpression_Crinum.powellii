@@ -17,6 +17,7 @@ expr_gt.1TPM = Exp_table_long_averaged_z %>%
     filter(mean.TPM > 1) %>% 
     select(gene_ID) %>% 
     unique
+length(expr_gt.1TPM$gene_ID)
 
 Exp_table_long_averaged_z <-
     Exp_table_long_averaged_z %>% 
@@ -101,9 +102,6 @@ var_plot = all_var_and_ranks %>%
 		plot.caption = element_text(hjust = 0)
 	) 
 
-# ggsave(plot = var_plot,
-#        filename = "plots/MainAnalysis/gene_var_distribution.svg", 
-#        height = 5, width = 5)
 ggsave(plot = var_plot, 
-       filename = "plots/MainAnalysis/gene_var_distribution.png", 
+       filename = "plots/gene_var_distribution.png", 
        height = 5, width = 5)
