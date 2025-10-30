@@ -1,8 +1,8 @@
 source("scripts/FUNCTIONS.R") # loads packages too,
 r_cutoff = 0.9
 resolution = 2
-load(list.files("RDATA/MainAnalysis_Cor0.9/", full.names = T))
-
+RDATA = list.files("RDATA/MainAnalysis_Cor0.9/", full.names = T)
+load(RDATA, verbose = T)
 # ============================================================
 #   2 Clean Tissue Names and Define Order
 # ============================================================
