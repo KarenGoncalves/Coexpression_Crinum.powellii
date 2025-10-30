@@ -81,10 +81,32 @@ select = dplyr::select
 
 
 cluster_leiden_mod <- function(network_data, r) {
-	return(cluster_leiden(network_data, 
-		       resolution_parameter = r, 
-		       objective_function = "modularity"
-	))
+    cl <- cluster_leiden(network_data, 
+                   resolution_parameter = r, 
+                   objective_function = "modularity"
+    )
+    membership <- membership(cl)
+    
+    # Convert to tibble
+    module_df <- tibble(
+        gene_ID = names(membership),
+        old_module = membership
+    )
+    
+    # Reorder module labels by size
+    module_df <- module_df %>%
+        count(old_module, name = "size") %>%
+        arrange(desc(size)) %>%
+        mutate(new_module = row_number()) %>% 
+        right_join(module_df, by = "old_module")
+    
+    # Update the igraph object with new module labels
+    cl$membership <- sapply(1:length(cl$membership), \(rowID) {
+        gene = cl$names[rowID]
+        module_df %>% filter(gene_ID == gene) %>% 
+            pull(new_module)
+    })
+    return(cl)
 }
 
 get_T_value <- function(r, nreps) {
