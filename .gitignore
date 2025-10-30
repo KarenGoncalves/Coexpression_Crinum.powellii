@@ -5,3 +5,4 @@
 RAW_DATA/
 RData/
 cor_table.csv
+*.Rproj
